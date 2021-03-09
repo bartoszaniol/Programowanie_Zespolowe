@@ -35,6 +35,9 @@ class Body extends StatelessWidget {
               child: FlatButton(
                 // color: Colors.grey,
                 textColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
                 // padding: EdgeInsets.all(8.0),
                 onPressed: () {},
                 child: Text(
@@ -53,6 +56,9 @@ class Body extends StatelessWidget {
               ),
               child: FlatButton(
                 textColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
                 // padding: EdgeInsets.all(8.0),
                 // splashColor: Colors.blueAccent,
                 onPressed: () {},
