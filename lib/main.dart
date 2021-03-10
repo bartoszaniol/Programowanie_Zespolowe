@@ -63,7 +63,7 @@ class Body extends StatelessWidget {
                 // splashColor: Colors.blueAccent,
                 onPressed: () {},
                 child: Text(
-                  "Wyjdz",
+                  "Wyjdź",
                   style: TextStyle(fontSize: 20.0),
                 ),
               ),
