@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:sudoku/gra.dart';
+
 class EkranGlowny extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,14 @@ class EkranGlowny extends StatelessWidget {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 // padding: EdgeInsets.all(8.0),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    new MaterialPageRoute(
+                      builder: (BuildContext context) => Gra(),
+                    ),
+                  );
+                },
                 child: Text(
                   "Graj",
                   style: TextStyle(fontSize: 20.0),
