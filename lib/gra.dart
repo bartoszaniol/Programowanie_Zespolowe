@@ -6,12 +6,14 @@ class Gra extends StatelessWidget {
     var mediaQuery = MediaQuery.of(context).size;
     Widget numberButton(Widget number) {
       return Container(
-        width: mediaQuery.width * 0.2,
+        width: mediaQuery.width * 0.18,
         height: mediaQuery.height * 0.1,
         child: RaisedButton(
           child: number,
           onPressed: () {},
-          color: Colors.white,
+          color: Colors.brown[600],
+          shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(30.0)),
         ),
       );
     }
@@ -20,9 +22,10 @@ class Gra extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: mediaQuery.height * 0.6,
+            height: mediaQuery.height * 0.66,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               numberButton(Text('1')),
               numberButton(Text('2')),
@@ -31,7 +34,11 @@ class Gra extends StatelessWidget {
               numberButton(Text('5')),
             ],
           ),
+          SizedBox(
+            height: 5,
+          ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               numberButton(Text('6')),
               numberButton(Text('7')),
@@ -41,26 +48,31 @@ class Gra extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: mediaQuery.height * 0.1,
+            height: mediaQuery.height * 0.04,
           ),
           Container(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
-                  Icons.refresh,
-                  size: 60,
+                IconButton(
+                  icon: Icon(Icons.refresh),
+                  onPressed: () {},
+                  iconSize: 50,
                 ),
-                Icon(
-                  Icons.undo,
-                  size: 60,
+                IconButton(
+                  icon: Icon(Icons.undo),
+                  onPressed: () {},
+                  iconSize: 50,
                 ),
-                Icon(
-                  Icons.done,
-                  size: 60,
+                IconButton(
+                  icon: Icon(Icons.done),
+                  onPressed: () {},
+                  iconSize: 50,
                 ),
-                Icon(
-                  Icons.edit,
-                  size: 60,
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {},
+                  iconSize: 50,
                 ),
               ],
             ),
