@@ -5,15 +5,18 @@ class Gra extends StatelessWidget {
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
     Widget numberButton(Widget number) {
-      return Container(
-        width: mediaQuery.width * 0.18,
-        height: mediaQuery.height * 0.1,
-        child: RaisedButton(
-          child: number,
-          onPressed: () {},
-          color: Colors.brown[600],
-          shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(30.0)),
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
+        child: Container(
+          width: mediaQuery.width * 0.18,
+          height: mediaQuery.height * 0.1,
+          child: RaisedButton(
+            child: number,
+            onPressed: () {},
+            color: Colors.brown[600],
+            shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(40.0)),
+          ),
         ),
       );
     }
