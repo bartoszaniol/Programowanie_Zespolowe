@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './plansza.dart';
 
 class Gra extends StatelessWidget {
   @override
@@ -25,7 +26,11 @@ class Gra extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: mediaQuery.height * 0.66,
+            height: mediaQuery.height * 0.1,
+          ),
+          Plansza(),
+          SizedBox(
+            height: mediaQuery.height * 0.08,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
