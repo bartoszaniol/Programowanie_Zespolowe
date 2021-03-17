@@ -12,7 +12,7 @@ class EkranGlowny extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "SUDOKU",
+              "SUZOKU",
               style: TextStyle(fontSize: 60.0, color: Color(0xffa59b66)),
             ),
             Image.network('https://i.imgur.com/wFFlZ8t.png'),
