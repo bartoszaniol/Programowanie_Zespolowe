@@ -9,8 +9,7 @@ class Zegar extends StatefulWidget {
 class _ZegarState extends State<Zegar> {
   String greeting = "";
   Timer _timer;
-  var czasM = DateTime.now().minute;
-  var czasS = DateTime.now().second;
+  var czasM = (DateTime.now().millisecondsSinceEpoch / 1000).round();
 
   @override
   void initState() {
@@ -18,8 +17,11 @@ class _ZegarState extends State<Zegar> {
 
     _timer = Timer.periodic(Duration(seconds: 1), (timer) {
       setState(() {
-        greeting =
-            "${DateTime.now().minute - czasM}:${DateTime.now().second - czasS}";
+        var czas =
+            (DateTime.now().millisecondsSinceEpoch / 1000).round() - czasM;
+        czas < 60
+            ? greeting = "$czas"
+            : greeting = "${czas ~/ 60}:${czas % 60}";
         print(greeting.toString());
       });
     });
