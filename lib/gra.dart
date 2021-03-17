@@ -52,7 +52,7 @@ class Gra extends StatelessWidget {
               numberButton(Text('7', style: TextStyle(fontSize: 30))),
               numberButton(Text('8', style: TextStyle(fontSize: 30))),
               numberButton(Text('9', style: TextStyle(fontSize: 30))),
-              numberButton(Icon(Icons.delete)),
+              numberButton(Icon(Icons.delete, size: 40)),
             ],
           ),
           SizedBox(
