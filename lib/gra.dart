@@ -35,11 +35,11 @@ class Gra extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              numberButton(Text('1')),
-              numberButton(Text('2')),
-              numberButton(Text('3')),
-              numberButton(Text('4')),
-              numberButton(Text('5')),
+              numberButton(Text('1', style: TextStyle(fontSize: 30))),
+              numberButton(Text('2', style: TextStyle(fontSize: 30))),
+              numberButton(Text('3', style: TextStyle(fontSize: 30))),
+              numberButton(Text('4', style: TextStyle(fontSize: 30))),
+              numberButton(Text('5', style: TextStyle(fontSize: 30))),
             ],
           ),
           SizedBox(
@@ -48,10 +48,10 @@ class Gra extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              numberButton(Text('6')),
-              numberButton(Text('7')),
-              numberButton(Text('8')),
-              numberButton(Text('9')),
+              numberButton(Text('6', style: TextStyle(fontSize: 30))),
+              numberButton(Text('7', style: TextStyle(fontSize: 30))),
+              numberButton(Text('8', style: TextStyle(fontSize: 30))),
+              numberButton(Text('9', style: TextStyle(fontSize: 30))),
               numberButton(Icon(Icons.delete)),
             ],
           ),
