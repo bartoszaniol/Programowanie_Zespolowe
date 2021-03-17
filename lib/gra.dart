@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sudoku/zegar.dart';
 import './plansza.dart';
 
 class Gra extends StatelessWidget {
@@ -26,7 +27,11 @@ class Gra extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: mediaQuery.height * 0.1,
+            height: mediaQuery.height * 0.05,
+          ),
+          Zegar(),
+          SizedBox(
+            height: mediaQuery.height * 0.01,
           ),
           Plansza(),
           SizedBox(
