@@ -32,7 +32,7 @@ class SudokuCell extends StatefulWidget {
   _SudokuCellState createState() => _SudokuCellState();
 }
 
-int cyfra = 2;
+int cyfra = 0;
 
 void zmiana(number) {
   cyfra = number;
