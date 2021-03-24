@@ -3,7 +3,15 @@ import 'package:flutter/material.dart';
 import './zegar.dart';
 import './plansza.dart';
 
-class Gra extends StatelessWidget {
+class Gra extends StatefulWidget {
+  @override
+  _GraState createState() => _GraState();
+}
+
+class _GraState extends State<Gra> {
+  //Do odświeżania czasu
+  var czasM = (DateTime.now().millisecondsSinceEpoch / 1000).round();
+
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context).size;
@@ -33,7 +41,7 @@ class Gra extends StatelessWidget {
           SizedBox(
             height: mediaQuery.height * 0.05,
           ),
-          Zegar(),
+          Zegar(czasM),
           SizedBox(
             height: mediaQuery.height * 0.01,
           ),
@@ -86,7 +94,12 @@ class Gra extends StatelessWidget {
               children: [
                 IconButton(
                   icon: Icon(Icons.refresh),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      czasM = (DateTime.now().millisecondsSinceEpoch / 1000)
+                          .round();
+                    });
+                  },
                   iconSize: 50,
                 ),
                 IconButton(

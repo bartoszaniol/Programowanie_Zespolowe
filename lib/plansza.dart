@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 class Plansza extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Table(
-      border: TableBorder.all(),
-      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-      children: _getTableRows(),
+    return Container(
+      decoration: BoxDecoration(border: Border.all(width: 2)),
+      child: Table(
+        border: TableBorder.all(width: 1),
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        children: _getTableRows(),
+      ),
     );
   }
 
@@ -53,6 +56,7 @@ class _SudokuCellState extends State<SudokuCell> {
   @override
   Widget build(BuildContext context) {
     return InkResponse(
+      customBorder: Border.all(width: 11),
       enableFeedback: true,
       onTap: () {
         print('${widget.row}, ${widget.col}');
