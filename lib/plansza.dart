@@ -32,17 +32,26 @@ class SudokuCell extends StatefulWidget {
   _SudokuCellState createState() => _SudokuCellState();
 }
 
+int cyfra = 2;
+
+void zmiana(number) {
+  cyfra = number;
+}
+
 class _SudokuCellState extends State<SudokuCell> {
   Widget wypelnienie({int cyfra = 0}) {
-    return cyfra > 0 ? Text('$cyfra') : Text('');
+    return cyfra > 0
+        ? Text(
+            '$cyfra',
+            style: TextStyle(fontSize: 30),
+          )
+        : Text('');
   }
 
   Widget text = Text('');
 
   @override
   Widget build(BuildContext context) {
-    int cyfra = 2;
-
     return InkResponse(
       enableFeedback: true,
       onTap: () {

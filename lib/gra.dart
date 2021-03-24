@@ -17,6 +17,7 @@ class Gra extends StatelessWidget {
             child: Text('$number', style: TextStyle(fontSize: 30)),
             onPressed: () {
               print('$number');
+              zmiana(number);
             },
             color: Colors.brown[600],
             shape: RoundedRectangleBorder(
@@ -68,7 +69,7 @@ class Gra extends StatelessWidget {
                     Icons.delete,
                     size: 40,
                   ),
-                  onPressed: () => print('Delete'),
+                  onPressed: () => zmiana(0),
                   color: Colors.brown[600],
                   shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(40.0)),
