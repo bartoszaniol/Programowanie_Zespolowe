@@ -109,7 +109,7 @@ class _GraState extends State<Gra> {
                 ),
                 IconButton(
                   icon: Icon(Icons.done),
-                  onPressed: () {},
+                  onPressed: sprawdzenielisty,
                   iconSize: 50,
                 ),
                 IconButton(

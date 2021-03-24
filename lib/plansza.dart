@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'gra.dart';
 
 class Plansza extends StatelessWidget {
   @override
@@ -37,8 +38,38 @@ class SudokuCell extends StatefulWidget {
 
 int cyfra = 0;
 
+List<List<int>> lista =
+    new List.generate(9, (i) => [0, 0, 0, 0, 0, 0, 0, 0, 0]);
+
 void zmiana(number) {
   cyfra = number;
+}
+
+void sprawdzenielisty() {
+  for (int i = 0; i < 9; i++) {
+    List temp = [];
+    for (int j = 0; j < 9; j++) {
+      if (lista[i][j] != 0) {
+        if (temp.contains(lista[i][j])) {
+          print("Duplikat to ${lista[i][j]}");
+        } else {
+          temp.add(lista[i][j]);
+        }
+      }
+    }
+  }
+  for (int i = 0; i < 9; i++) {
+    List temp = [];
+    for (int j = 0; j < 9; j++) {
+      if (lista[j][i] != 0) {
+        if (temp.contains(lista[j][i])) {
+          print("Duplikat to ${lista[j][i]}");
+        } else {
+          temp.add(lista[j][i]);
+        }
+      }
+    }
+  }
 }
 
 class _SudokuCellState extends State<SudokuCell> {
@@ -62,6 +93,8 @@ class _SudokuCellState extends State<SudokuCell> {
         print('${widget.row}, ${widget.col}');
         setState(() {
           text = wypelnienie(cyfra: cyfra);
+          lista[widget.row][widget.col] = cyfra;
+          // print(lista);
         });
       },
       child: SizedBox(
