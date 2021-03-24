@@ -23,23 +23,39 @@ class Plansza extends StatelessWidget {
   }
 }
 
-class SudokuCell extends StatelessWidget {
+class SudokuCell extends StatefulWidget {
   final int row, col;
 
   SudokuCell(this.row, this.col);
 
   @override
+  _SudokuCellState createState() => _SudokuCellState();
+}
+
+class _SudokuCellState extends State<SudokuCell> {
+  Widget wypelnienie({int cyfra = 0}) {
+    return cyfra > 0 ? Text('$cyfra') : Text('');
+  }
+
+  Widget text = Text('');
+
+  @override
   Widget build(BuildContext context) {
+    int cyfra = 2;
+
     return InkResponse(
       enableFeedback: true,
       onTap: () {
-        print('$row, $col');
+        print('${widget.row}, ${widget.col}');
+        setState(() {
+          text = wypelnienie(cyfra: cyfra);
+        });
       },
       child: SizedBox(
         width: 40,
         height: 40,
         child: Center(
-          child: Text(''),
+          child: text,
         ),
       ),
     );

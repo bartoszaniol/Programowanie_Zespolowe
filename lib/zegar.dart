@@ -22,7 +22,7 @@ class _ZegarState extends State<Zegar> {
         czas < 60
             ? greeting = "$czas"
             : greeting = "${czas ~/ 60}:${czas % 60}";
-        print(greeting.toString());
+        // print(greeting.toString());
       });
     });
   }
