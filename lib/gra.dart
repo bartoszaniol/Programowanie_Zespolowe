@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:sudoku/ekran_glowny.dart';
 
 import 'package:sudoku/zegar.dart';
 import 'plansza.dart' as map;
 import 'walidacja.dart' as validator;
+import 'wyniki.dart';
 
 class Gra extends StatefulWidget {
   @override
@@ -36,6 +38,20 @@ class _GraState extends State<Gra> {
     }
   }
 
+  bool sprawdzenie(Map mapa) {
+    int i = 0;
+    mapa.forEach((k, v) {
+      if (v == 0) {
+        i++;
+      }
+    });
+    if (i > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   Widget numberButton(int thisPointer) {
     return GestureDetector(
       onTap: () {
@@ -51,13 +67,65 @@ class _GraState extends State<Gra> {
         width: 70,
         height: 70,
         child: Center(
-          child: Text(
-            '${thisPointer == 0 ? 'X' : thisPointer}',
-            style: TextStyle(fontSize: 20),
-          ),
+          child: thisPointer != 0
+              ? Text(
+                  '$thisPointer',
+                  style: TextStyle(fontSize: 30),
+                )
+              : Icon(Icons.delete),
         ),
       ),
     );
+  }
+
+  Future<void> winerwinerchickendiner(BuildContext context) async {
+    return await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
+            backgroundColor: Colors.brown[600],
+            content: Container(
+              height: 200,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Wygrales !",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 45,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 85,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        new MaterialPageRoute(
+                          builder: (BuildContext context) => EkranGlowny(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Powrot do menu",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            actions: [],
+          );
+        });
   }
 
   @override
@@ -90,6 +158,21 @@ class _GraState extends State<Gra> {
                         lastEdit = map.mapBoard[tileId];
                         lastEditId = tileId;
                         map.mapBoard.update(tileId, (_) => pointer);
+                        if (sprawdzenie(map.mapBoard)) {
+                          if (validator.Validator(map.mapBoard)
+                                  .validate()
+                                  .length ==
+                              0) {
+                            var koncowyczas =
+                                (DateTime.now().millisecondsSinceEpoch / 1000)
+                                        .round() -
+                                    czas;
+                            print(koncowyczas);
+                            Wynik czasKoncowy = Wynik(koncowyczas);
+
+                            winerwinerchickendiner(context);
+                          }
+                        }
                       });
                     },
                     child: Container(
@@ -181,7 +264,11 @@ class _GraState extends State<Gra> {
                 onPressed: () {
                   validator.Validator(map.mapBoard).validate();
                   setState(() {
-                    isValidate = true;
+                    if (isValidate == true) {
+                      isValidate = false;
+                    } else {
+                      isValidate = true;
+                    }
                   });
                 },
               ),
