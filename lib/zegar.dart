@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:flutter/material.dart';
 
 class Zegar extends StatefulWidget {
   final int czas;
@@ -33,7 +34,7 @@ class _ZegarState extends State<Zegar> {
     return Center(
       child: Text(
         greeting,
-        style: TextStyle(fontSize: 30),
+        style: TextStyle(fontSize: 30, color: Colors.grey),
       ),
     );
   }

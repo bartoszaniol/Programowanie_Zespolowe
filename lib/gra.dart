@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import './zegar.dart';
-import './plansza.dart';
+import 'package:sudoku/zegar.dart';
+import 'plansza.dart' as map;
+import 'walidacja.dart' as validator;
 
 class Gra extends StatefulWidget {
   @override
@@ -9,49 +10,125 @@ class Gra extends StatefulWidget {
 }
 
 class _GraState extends State<Gra> {
-  //Do odświeżania czasu
-  var czasM = (DateTime.now().millisecondsSinceEpoch / 1000).round();
+  int pointer = 0;
+  String lastEditId;
+  int lastEdit;
+  Map<String, int> resetBoard;
+  bool isValidate = false;
+  var czas = (DateTime.now().millisecondsSinceEpoch / 1000).round();
+
+  @override
+  void initState() {
+    super.initState();
+    resetBoard = Map.from(map.mapBoard);
+  }
+
+  Color changeColor(String idMap) {
+    if (!isValidate) {
+      return Colors.grey;
+    } else {
+      var tmp = validator.Validator(map.mapBoard).validate();
+      if (tmp.contains(idMap)) {
+        return Colors.red;
+      } else {
+        return Colors.grey;
+      }
+    }
+  }
+
+  Widget numberButton(int thisPointer) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          pointer = thisPointer;
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            // border: Border.all(color: Colors.brown[600]),
+            borderRadius: BorderRadius.circular(40),
+            color: Colors.brown[600]),
+        width: 70,
+        height: 70,
+        child: Center(
+          child: Text(
+            '${thisPointer == 0 ? 'X' : thisPointer}',
+            style: TextStyle(fontSize: 20),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    var mediaQuery = MediaQuery.of(context).size;
-    Widget numberButton(number) {
-      return Padding(
-        padding: const EdgeInsets.fromLTRB(3, 0, 3, 0),
-        child: Container(
-          width: mediaQuery.width * 0.18,
-          height: mediaQuery.height * 0.1,
-          child: RaisedButton(
-            child: Text('$number', style: TextStyle(fontSize: 30)),
-            onPressed: () {
-              print('$number');
-              zmiana(number);
-            },
-            color: Colors.brown[600],
-            shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(40.0)),
-          ),
-        ),
-      );
-    }
-
     return Scaffold(
       body: Column(
         children: [
           SizedBox(
-            height: mediaQuery.height * 0.05,
+            height: 60,
           ),
-          Zegar(czasM),
-          SizedBox(
-            height: mediaQuery.height * 0.01,
+          Zegar(czas),
+          Container(
+            height: 400,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: GridView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                reverse: true,
+                itemCount: 81,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 9),
+                itemBuilder: (context, index) {
+                  var xIndex = index % 9;
+                  var yIndex = (index / 9).floor();
+                  var tileId = '${tileLetter[xIndex]}${yIndex + 1}';
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        lastEdit = map.mapBoard[tileId];
+                        lastEditId = tileId;
+                        map.mapBoard.update(tileId, (_) => pointer);
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          left: BorderSide(
+                              width: xIndex % 3 == 0 ? 4 : 1,
+                              color: Colors.grey),
+                          right: BorderSide(
+                              width: xIndex == 8 ? 4 : 1, color: Colors.grey),
+                          bottom: BorderSide(
+                              width: yIndex % 3 == 0 ? 4 : 1,
+                              color: Colors.grey),
+                          top: BorderSide(
+                              width: yIndex == 8 ? 4 : 1, color: Colors.grey),
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          map.mapBoard[tileId] == 0
+                              ? ''
+                              : map.mapBoard[tileId].toString(),
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: changeColor(tileId)), //changeColor(tileId)
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
-          Plansza(),
           SizedBox(
-            height: mediaQuery.height * 0.08,
+            height: 20,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
               numberButton(1),
               numberButton(2),
               numberButton(3),
@@ -60,68 +137,70 @@ class _GraState extends State<Gra> {
             ],
           ),
           SizedBox(
-            height: 5,
+            height: 10,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
               numberButton(6),
               numberButton(7),
               numberButton(8),
               numberButton(9),
-              Container(
-                width: mediaQuery.width * 0.18,
-                height: mediaQuery.height * 0.1,
-                child: RaisedButton(
-                  child: Icon(
-                    Icons.delete,
-                    size: 40,
-                  ),
-                  onPressed: () => zmiana(0),
-                  color: Colors.brown[600],
-                  shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(40.0)),
-                ),
-              ),
+              numberButton(0),
             ],
           ),
           SizedBox(
-            height: mediaQuery.height * 0.04,
+            height: 35,
           ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.refresh),
-                  onPressed: () {
-                    setState(() {
-                      czasM = (DateTime.now().millisecondsSinceEpoch / 1000)
-                          .round();
-                    });
-                  },
-                  iconSize: 50,
-                ),
-                IconButton(
-                  icon: Icon(Icons.undo),
-                  onPressed: () {},
-                  iconSize: 50,
-                ),
-                IconButton(
-                  icon: Icon(Icons.done),
-                  onPressed: sprawdzenielisty,
-                  iconSize: 50,
-                ),
-                IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {},
-                  iconSize: 50,
-                ),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                iconSize: 40,
+                icon: Icon(Icons.undo),
+                onPressed: () {
+                  setState(() {
+                    map.mapBoard.update(lastEditId, (_) => lastEdit);
+                  });
+                },
+              ),
+              IconButton(
+                iconSize: 40,
+                icon: Icon(Icons.refresh),
+                onPressed: () {
+                  setState(() {
+                    map.mapBoard = Map.from(resetBoard);
+                    czas =
+                        (DateTime.now().millisecondsSinceEpoch / 1000).round();
+                  });
+                },
+              ),
+              IconButton(
+                iconSize: 40,
+                icon: Icon(Icons.done),
+                onPressed: () {
+                  validator.Validator(map.mapBoard).validate();
+                  setState(() {
+                    isValidate = true;
+                  });
+                },
+              ),
+            ],
           ),
         ],
       ),
     );
   }
+
+  Map<int, String> tileLetter = {
+    0: 'A',
+    1: 'B',
+    2: 'C',
+    3: 'D',
+    4: 'E',
+    5: 'F',
+    6: 'G',
+    7: 'H',
+    8: 'I'
+  };
 }

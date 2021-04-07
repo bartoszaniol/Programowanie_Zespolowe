@@ -1,109 +1,83 @@
-import 'package:flutter/material.dart';
-import 'gra.dart';
-
-class Plansza extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(border: Border.all(width: 2)),
-      child: Table(
-        border: TableBorder.all(width: 1),
-        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
-        children: _getTableRows(),
-      ),
-    );
-  }
-
-  List<TableRow> _getTableRows() {
-    return List.generate(9, (int rowNumber) {
-      return TableRow(children: _getRow(rowNumber));
-    });
-  }
-
-  List<Widget> _getRow(int rowNumber) {
-    return List.generate(9, (int colNumber) {
-      return SudokuCell(rowNumber, colNumber);
-    });
-  }
-}
-
-class SudokuCell extends StatefulWidget {
-  final int row, col;
-
-  SudokuCell(this.row, this.col);
-
-  @override
-  _SudokuCellState createState() => _SudokuCellState();
-}
-
-int cyfra = 0;
-
-List<List<int>> lista =
-    new List.generate(9, (i) => [0, 0, 0, 0, 0, 0, 0, 0, 0]);
-
-void zmiana(number) {
-  cyfra = number;
-}
-
-void sprawdzenielisty() {
-  for (int i = 0; i < 9; i++) {
-    List temp = [];
-    for (int j = 0; j < 9; j++) {
-      if (lista[i][j] != 0) {
-        if (temp.contains(lista[i][j])) {
-          print("Duplikat to ${lista[i][j]}");
-        } else {
-          temp.add(lista[i][j]);
-        }
-      }
-    }
-  }
-  for (int i = 0; i < 9; i++) {
-    List temp = [];
-    for (int j = 0; j < 9; j++) {
-      if (lista[j][i] != 0) {
-        if (temp.contains(lista[j][i])) {
-          print("Duplikat to ${lista[j][i]}");
-        } else {
-          temp.add(lista[j][i]);
-        }
-      }
-    }
-  }
-}
-
-class _SudokuCellState extends State<SudokuCell> {
-  Widget wypelnienie({int cyfra = 0}) {
-    return cyfra > 0
-        ? Text(
-            '$cyfra',
-            style: TextStyle(fontSize: 30),
-          )
-        : Text('');
-  }
-
-  Widget text = Text('');
-
-  @override
-  Widget build(BuildContext context) {
-    return InkResponse(
-      customBorder: Border.all(width: 11),
-      enableFeedback: true,
-      onTap: () {
-        print('${widget.row}, ${widget.col}');
-        setState(() {
-          text = wypelnienie(cyfra: cyfra);
-          lista[widget.row][widget.col] = cyfra;
-          // print(lista);
-        });
-      },
-      child: SizedBox(
-        width: 40,
-        height: 40,
-        child: Center(
-          child: text,
-        ),
-      ),
-    );
-  }
-}
+Map<String, int> mapBoard = {
+  'A1': 5,
+  'A2': 0,
+  'A3': 0,
+  'A4': 0,
+  'A5': 0,
+  'A6': 5,
+  'A7': 0,
+  'A8': 0,
+  'A9': 0,
+  'B1': 0,
+  'B2': 0,
+  'B3': 0,
+  'B4': 0,
+  'B5': 0,
+  'B6': 0,
+  'B7': 0,
+  'B8': 0,
+  'B9': 0,
+  'C1': 0,
+  'C2': 0,
+  'C3': 0,
+  'C4': 0,
+  'C5': 0,
+  'C6': 0,
+  'C7': 0,
+  'C8': 0,
+  'C9': 0,
+  'D1': 0,
+  'D2': 0,
+  'D3': 0,
+  'D4': 0,
+  'D5': 0,
+  'D6': 0,
+  'D7': 0,
+  'D8': 0,
+  'D9': 0,
+  'E1': 0,
+  'E2': 0,
+  'E3': 0,
+  'E4': 0,
+  'E5': 0,
+  'E6': 0,
+  'E7': 0,
+  'E8': 0,
+  'E9': 0,
+  'F1': 0,
+  'F2': 0,
+  'F3': 0,
+  'F4': 0,
+  'F5': 0,
+  'F6': 0,
+  'F7': 0,
+  'F8': 0,
+  'F9': 0,
+  'G1': 0,
+  'G2': 0,
+  'G3': 0,
+  'G4': 0,
+  'G5': 0,
+  'G6': 0,
+  'G7': 0,
+  'G8': 0,
+  'G9': 0,
+  'H1': 0,
+  'H2': 0,
+  'H3': 0,
+  'H4': 0,
+  'H5': 0,
+  'H6': 0,
+  'H7': 0,
+  'H8': 0,
+  'H9': 0,
+  'I1': 0,
+  'I2': 0,
+  'I3': 0,
+  'I4': 0,
+  'I5': 0,
+  'I6': 0,
+  'I7': 0,
+  'I8': 0,
+  'I9': 0,
+};
