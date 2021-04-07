@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:sudoku/ekran_glowny.dart';
 
@@ -22,7 +24,38 @@ class _GraState extends State<Gra> {
   @override
   void initState() {
     super.initState();
+    List<List<String>> litery = [
+      ["A", "B", "C"],
+      ["D", "E", "F"],
+      ["G", "H", "I"]
+    ];
+    List<List<int>> rzad = [
+      [1, 2, 3],
+      [4, 5, 6],
+      [7, 8, 9]
+    ];
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        losowanie(litery[i], rzad[j]);
+      }
+    }
     resetBoard = Map.from(map.mapBoard);
+  }
+
+  void losowanie(List<String> litery, List<int> rzad) {
+    var rng = Random();
+    for (int i = 0; i < 3; i++) {
+      int wybranyRzad = rng.nextInt(3) + rzad[0];
+      String wybranaLitera = litery[rng.nextInt(3)];
+
+      while (true) {
+        int wybranaCyfra = rng.nextInt(9) + 1;
+        map.mapBoard["$wybranaLitera$wybranyRzad"] = wybranaCyfra;
+        if (validator.Validator(map.mapBoard).validate().length == 0) {
+          break;
+        }
+      }
+    }
   }
 
   Color changeColor(String idMap) {
