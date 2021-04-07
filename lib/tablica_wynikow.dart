@@ -29,6 +29,8 @@ class _TablicaWynikowState extends State<TablicaWynikow> {
             SizedBox(
               height: 50,
             ),
+            Image.network(
+                'https://i.pinimg.com/originals/4d/22/ca/4d22ca8cf25a747ad3152163a0635e5f.gif'),
             // ListView(),
             IconButton(
               icon: Icon(

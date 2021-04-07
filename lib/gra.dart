@@ -112,6 +112,7 @@ class _GraState extends State<Gra> {
   }
 
   Future<void> winerwinerchickendiner(BuildContext context) async {
+    int wynik = (DateTime.now().millisecondsSinceEpoch / 1000).round() - czas;
     return await showDialog(
         context: context,
         builder: (context) {
@@ -134,7 +135,14 @@ class _GraState extends State<Gra> {
                     ),
                   ),
                   SizedBox(
-                    height: 85,
+                    height: 10,
+                  ),
+                  Text(
+                    "Twoj wynik to : $wynik",
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ),
+                  SizedBox(
+                    height: 45,
                   ),
                   TextButton(
                     onPressed: () {
