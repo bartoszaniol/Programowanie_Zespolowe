@@ -45,7 +45,7 @@ class _GraState extends State<Gra> {
   void losowanie(List<String> litery, List<int> rzad) {
     var rng = Random();
     for (int i = 0; i < 3; i++) {
-      int wybranyRzad = rng.nextInt(3) + rzad[0];
+      int wybranyRzad = rng.nextInt(5) + rzad[0];
       String wybranaLitera = litery[rng.nextInt(3)];
 
       while (true) {
@@ -146,6 +146,9 @@ class _GraState extends State<Gra> {
                   ),
                   TextButton(
                     onPressed: () {
+                      setState(() {
+                        map.mapBoard = Map.from(resetBoard);
+                      });
                       Navigator.pushReplacement(
                         context,
                         new MaterialPageRoute(
