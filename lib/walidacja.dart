@@ -52,7 +52,7 @@ class Validator {
             var value = board['${tileLetter[i]}$j']; // wartosc dodanego id
             var tmp = temp.keys.firstWhere((k) => temp[k] == value,
                 orElse: () =>
-                    null); // znajdz pierwszy element duplikatu (bo sie nie dodal xD)
+                    null); // znajdz pierwszy element duplikatu (bo sie nie dodal wczesniej)
             if (tmp != null) {
               x.add(tmp); // dodaj ten pierwszy element gdy nie jest zerem
             }
