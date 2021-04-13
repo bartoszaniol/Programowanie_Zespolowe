@@ -212,7 +212,7 @@ class _GraState extends State<Gra> {
                                         .round() -
                                     czas;
                             print(koncowyczas);
-                            Wynik czasKoncowy = Wynik(koncowyczas);
+                            Wynik czasKoncowy = Wynik(czas: koncowyczas);
 
                             winerwinerchickendiner(context);
                           }

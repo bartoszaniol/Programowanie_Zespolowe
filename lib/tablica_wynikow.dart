@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'ekran_glowny.dart';
-import 'dart:convert';
+import 'wyniki.dart' as wyniki;
 import 'gra.dart';
 
 class TablicaWynikow extends StatefulWidget {
@@ -31,6 +31,7 @@ class _TablicaWynikowState extends State<TablicaWynikow> {
             ),
             Image.network(
                 'https://i.pinimg.com/originals/4d/22/ca/4d22ca8cf25a747ad3152163a0635e5f.gif'),
+            Text(wyniki.Wynik().wynikis[1].toString()),
             // ListView(),
             IconButton(
               icon: Icon(
