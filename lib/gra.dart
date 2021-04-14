@@ -45,7 +45,7 @@ class _GraState extends State<Gra> {
   void losowanie(List<String> litery, List<int> rzad) {
     var rng = Random();
     for (int i = 0; i < 3; i++) {
-      int wybranyRzad = rng.nextInt(5) + rzad[0];
+      int wybranyRzad = rng.nextInt(3) + rzad[0];
       String wybranaLitera = litery[rng.nextInt(3)];
 
       while (true) {
@@ -114,6 +114,7 @@ class _GraState extends State<Gra> {
   Future<void> winerwinerchickendiner(BuildContext context) async {
     int wynik = (DateTime.now().millisecondsSinceEpoch / 1000).round() - czas;
     return await showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -200,9 +201,9 @@ class _GraState extends State<Gra> {
                     onTap: () {
                       setState(() {
                         zmianaLiczba.add(map.mapBoard[tileId]);
-                        print(zmianaLiczba);
+
                         zmianaId.add(tileId);
-                        print(zmianaId);
+
                         map.mapBoard.update(tileId, (_) => pointer);
                         if (sprawdzenie(map.mapBoard)) {
                           if (validator.Validator(map.mapBoard)
@@ -214,7 +215,8 @@ class _GraState extends State<Gra> {
                                         .round() -
                                     czas;
                             print(koncowyczas);
-                            Wynik czasKoncowy = Wynik(czas: koncowyczas);
+                            // Wynik czasKoncowy = Wynik(czas: koncowyczas);
+                            Wynik().writeCounter(koncowyczas);
 
                             winerwinerchickendiner(context);
                           }
@@ -294,9 +296,6 @@ class _GraState extends State<Gra> {
                           .update(zmianaId.last, (_) => zmianaLiczba.last);
                       zmianaId.removeLast();
                       zmianaLiczba.removeLast();
-                      print("Po zmianie");
-                      print(zmianaId);
-                      print(zmianaLiczba);
                     }
                   });
                 },

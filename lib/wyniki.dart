@@ -1,16 +1,38 @@
-import 'dart:convert';
+import 'dart:async';
+import 'dart:io';
+
+import 'package:path_provider/path_provider.dart';
 
 class Wynik {
-  final int czas;
-  Wynik({this.czas});
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
 
-  Map<int, int> wynikis = {1: 0};
-  
-  // var wynikiJson = jsonEncode(wynikis);
+    return directory.path;
+  }
 
-  void addToMap() {}
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/counter.txt');
+  }
 
-  // Wynik.fromJson(Map<String, dynamic> json) : czas = json['czas'];
+  Future<List<String>> readCounter() async {
+    try {
+      final file = await _localFile;
 
-  // Map<String, dynamic> toJson() => {'czas': czas};
+      // Read the file
+      List<String> contents = await file.readAsLines();
+
+      return contents;
+    } catch (e) {
+      // If encountering an error, return 0
+      return [];
+    }
+  }
+
+  Future<File> writeCounter(int counter) async {
+    final file = await _localFile;
+
+    // Write the file
+    return file.writeAsString('$counter\n', mode: FileMode.append);
+  }
 }
