@@ -15,8 +15,8 @@ class Gra extends StatefulWidget {
 
 class _GraState extends State<Gra> {
   int pointer = 0;
-  String lastEditId;
-  int lastEdit;
+  List<String> zmianaId = [];
+  List<int> zmianaLiczba = [];
   Map<String, int> resetBoard;
   bool isValidate = false;
   var czas = (DateTime.now().millisecondsSinceEpoch / 1000).round();
@@ -199,8 +199,10 @@ class _GraState extends State<Gra> {
                   return GestureDetector(
                     onTap: () {
                       setState(() {
-                        lastEdit = map.mapBoard[tileId];
-                        lastEditId = tileId;
+                        zmianaLiczba.add(map.mapBoard[tileId]);
+                        print(zmianaLiczba);
+                        zmianaId.add(tileId);
+                        print(zmianaId);
                         map.mapBoard.update(tileId, (_) => pointer);
                         if (sprawdzenie(map.mapBoard)) {
                           if (validator.Validator(map.mapBoard)
@@ -287,7 +289,15 @@ class _GraState extends State<Gra> {
                 icon: Icon(Icons.undo),
                 onPressed: () {
                   setState(() {
-                    map.mapBoard.update(lastEditId, (_) => lastEdit);
+                    if (!zmianaId.isEmpty) {
+                      map.mapBoard
+                          .update(zmianaId.last, (_) => zmianaLiczba.last);
+                      zmianaId.removeLast();
+                      zmianaLiczba.removeLast();
+                      print("Po zmianie");
+                      print(zmianaId);
+                      print(zmianaLiczba);
+                    }
                   });
                 },
               ),
