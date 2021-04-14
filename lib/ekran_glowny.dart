@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:sudoku/gra.dart';
@@ -91,7 +93,7 @@ class EkranGlowny extends StatelessWidget {
                 ),
                 // padding: EdgeInsets.all(8.0),
                 // splashColor: Colors.blueAccent,
-                onPressed: () {},
+                onPressed: () => exit(0),
                 child: Text(
                   "Wyjdź",
                   style: TextStyle(fontSize: 20.0),
