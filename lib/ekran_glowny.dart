@@ -94,7 +94,7 @@ class EkranGlowny extends StatelessWidget {
                 ),
                 // padding: EdgeInsets.all(8.0),
                 // splashColor: Colors.blueAccent,
-                onPressed: () => SystemNavigator.pop(),
+                onPressed: () => exit(0),
                 child: Text(
                   "Wyjdź",
                   style: TextStyle(fontSize: 20.0),
