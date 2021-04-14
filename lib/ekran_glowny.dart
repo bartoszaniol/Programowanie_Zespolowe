@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:sudoku/gra.dart';
 import 'package:sudoku/tablica_wynikow.dart';
@@ -93,7 +94,7 @@ class EkranGlowny extends StatelessWidget {
                 ),
                 // padding: EdgeInsets.all(8.0),
                 // splashColor: Colors.blueAccent,
-                onPressed: () => exit(0),
+                onPressed: () => SystemNavigator.pop(),
                 child: Text(
                   "Wyjdź",
                   style: TextStyle(fontSize: 20.0),
